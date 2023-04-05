@@ -47,6 +47,23 @@ const response = {    // Send a response to the client
   res.json(response);
 });
 
+app.delete('/api/notes/:id', (req, res) => { //API route to delete a note (Bonus Criteria)
+  const noteId = req.params.id;
+
+  fs.readFile(path.join(__dirname, 'db', 'db.json'), (err, data) => { //Read the existing notes from the db file
+    if (err) throw err; 
+
+    const dbInput = JSON.parse(data);
+    const filteredNotes = dbInput.filter(note => note.id !== noteId);  //Find the note with the specified ID and remove it from the array
+
+    fs.writeFile(path.join(__dirname, 'db', 'db.json'), JSON.stringify(filteredNotes), (err) => { // Write the updated notes array to the db file
+      if (err) throw err;
+      console.log('Successfully deleted note');
+      res.status(204).end(); // Send a response with status 204 indicating success
+    });
+  });
+});
+
 app.listen(PORT, () => { //Listens on local server
   console.log(`App listening at http://localhost:${PORT}`);
 });
