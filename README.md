@@ -1,6 +1,6 @@
-# Note-Taker
+# Note Taker
 
-https://secure-shore-43150.herokuapp.com/
+https://secure-shore-43150.herokuapp.com/ (This application has been spun down on Heroku.  Email me for further information)
 
 ## Description
 
